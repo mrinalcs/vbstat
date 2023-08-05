@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VBSTAT</title>
+</head>
+<body>
+    <h1>Notes</h1>
+    <div id="fileList"></div>
+
+    <script> 
+        var jsonData = [
+    "mathematical-analysis\/(Numerical) Analysis Ch 4 part 4.pdf",
+    "mathematical-analysis\/(Numerical) Analysis Ch 4 part 5 (1).pdf",
+    "mathematical-analysis\/(Numerical) Analysis Ch 4 part 6.pdf",
+    "mathematical-analysis\/(Numerical) Analysis Ch 4 part 7.pdf",
+    "mathematical-analysis\/(Numerical) Analysis Ch 4 part 8.pdf",
+    "mathematical-analysis\/202004032250571912siddharth_bhatt_engg_Numerical_Differentation_and_Integration.pdf",
+    "mathematical-analysis\/Analysis Chapter 1 (part 1)_Sets _ Sequences.pdf",
+    "mathematical-analysis\/Analysis Chapter 1 (part 2)_Sets _ Sequences.pdf",
+    "mathematical-analysis\/Analysis Chapter 1 (part 3)_Sets _ Sequences.pdf",
+    "mathematical-analysis\/Analysis Chapter 1 (part 4)_Sets _ Sequences.pdf",
+    "mathematical-analysis\/Analysis Chapter 1 (part 5)_Sets _ Sequences.pdf",
+    "mathematical-analysis\/Analysis Chapter 2 _ Series Convergence  (part 2).pdf",
+    "mathematical-analysis\/Analysis Chapter 2 _ Series Convergence (part 3).pdf",
+    "mathematical-analysis\/Analysis_note_2021 Chapter 3 part 1.pdf",
+    "mathematical-analysis\/Analysis_note_VBU_2021 (upto part 1,2,3,4).pdf",
+    "mathematical-analysis\/Analysis_note_chapter 3 part 2_ 2021.pdf",
+    "mathematical-analysis\/Copy of Analysis Chapter 2 _ Series Convergence  (part 1 ).pdf",
+    "mathematical-analysis\/Take Home Assignment 1.pdf",
+    "mathematical-analysis\/Using R for Numerical Analysis in Science and Engineering.pdf",
+    "mathematical-analysis\/Whole Differential (part 1,2, 3 updated).pdf",
+    "mathematical-analysis\/Whole Differential (part 1,2, 3,4,5  updated).pdf",
+    "mathematical-analysis\/analysis surprise test (seq,series) (1).pdf",
+    "demography-and-vital-statistics\/DSE-2 Demography-III.pdf",
+    "demography-and-vital-statistics\/DSE-2B-2020_practical.pdf",
+    "demography-and-vital-statistics\/Demography[409]22.pdf",
+    "demography-and-vital-statistics\/UG_DEMO_SSM.pdf",
+    "demography-and-vital-statistics\/dse prac 3.pdf",
+    "probability\/1_Probability_1.pdf",
+    "probability\/1_Probability_2.pdf",
+    "probability\/1_Probability_3.pdf",
+    "probability\/1_Probability_4.pdf",
+    "probability\/1_Probability_5.pdf",
+    "probability\/2_Probability_1.pdf",
+    "probability\/2_Probability_2.pdf",
+    "probability\/2_Probability_3.pdf",
+    "probability\/2_Probability_4.pdf",
+    "probability\/3_Probability_1.pdf",
+    "probability\/3_Probability_2.pdf",
+    "probability\/Bin, Poi, Normal fitting with exercises (1).pdf",
+    "probability\/CC3 Internal_2.pdf",
+    "probability\/CC3 Internal_3.pdf",
+    "probability\/CC3 Internal_4.pdf",
+    "probability\/CC3_Internal.pdf",
+    "r-programming\/R LANGUAGE (1).pdf",
+    "r-programming\/R-LANGUAGE.html",
+    "r-programming\/SEE_1-1.pdf",
+    "r-programming\/SEE_1-2.pdf",
+    "r-programming\/SEE_1-3.pdf",
+    "r-programming\/SEE_2-1.pdf",
+    "r-programming\/SEE_2-2.pdf",
+    "r-programming\/chapter-3.pdf",
+    "r-programming\/chapter-3_compressed.pdf",
+    "calculus\/1_Differential Calculus_1.pdf",
+    "calculus\/1_Differential Calculus_2.pdf",
+    "calculus\/1_Differential Calculus_3.pdf",
+    "calculus\/1_Differential Calculus_4.pdf",
+    "calculus\/2_Integral Calculus_1.pdf",
+    "calculus\/2_Integral Calculus_2.pdf",
+    "calculus\/2_Integral Calculus_3.pdf",
+    "calculus\/2_Integral Calculus_4.pdf",
+    "calculus\/2_Integral Calculus_5.pdf",
+    "calculus\/3_ODE_1.pdf",
+    "calculus\/3_ODE_2.pdf",
+    "calculus\/3_ODE_3.pdf",
+    "calculus\/3_ODE_4.pdf",
+    "calculus\/3_ODE_5.pdf",
+    "calculus\/4_PDE_1.pdf",
+    "calculus\/Syllabus.pdf",
+    "time-series-analysis\/Assignment1.pdf",
+    "time-series-analysis\/Exponential smoothing_forecasting.pdf",
+    "time-series-analysis\/Forecasting (1).pptx",
+    "time-series-analysis\/HoltWinters output interpretation in R.pdf",
+    "time-series-analysis\/Stationarity_Ar(2)_ACF.pdf",
+    "time-series-analysis\/concept of stionarity via diagrams.pdf",
+    "time-series-analysis\/concept to time series analysis by plot_First lec.PDF",
+    "time-series-analysis\/concept to time series analysis by plot_First lec.pptx",
+    "time-series-analysis\/internal-2-time-series.pdf",
+    "time-series-analysis\/lecture1 Introduction to time series-a detailed discussion.pdf",
+    "time-series-analysis\/lecture2.pdf",
+    "time-series-analysis\/practical-internal-1-time-series.pdf",
+    "stochastic-process\/markov-chain.pdf",
+    "stochastic-process\/sr-handnote-upto-16-11-22-10mb.pdf",
+    "stochastic-process\/sr-handnote-upto-16-11-22.pdf",
+    "stochastic-process\/stochastic-process.pdf",
+    "sample-survey\/Introduction to Indian Statistical System.pdf",
+    "sample-survey\/Problem set 1.pdf",
+    "sample-survey\/Sample Survey day 2.pdf",
+    "sample-survey\/Sample Survey day 3.pdf",
+    "sample-survey\/chapter11-sampling-systematic-sampling.pdf",
+    "sample-survey\/drawing_simple_random_sampling_handwritten_solution.pdf",
+    "sample-survey\/sample survey day 1.pdf",
+    "sample-survey\/sample_survey_practical_questions.pdf",
+    "sample-survey\/stratified_systematic_ratio_regression_double_two_stage_sampling_practical_handwritten_solution.pdf"
+];
+
+        // Get the <div> element
+        var fileList = document.getElementById("fileList");
+
+         
+        var groups = {};
+        for (var i = 0; i < jsonData.length; i++) {
+            var parts = jsonData[i].split('/');
+            var heading = parts[0];
+            if (!groups[heading]) {
+                groups[heading] = [];
+            }
+            groups[heading].push(jsonData[i]);
+        }
+ 
+        for (var heading in groups) {
+            var groupDiv = document.createElement("div");
+            var headingElem = document.createElement("h2");
+            headingElem.textContent = heading;
+            groupDiv.appendChild(headingElem);
+
+            var ul = document.createElement("ul");
+            var links = groups[heading];
+            for (var j = 0; j < links.length; j++) {
+                var li = document.createElement("li");
+                var link = document.createElement("a");
+                var url = "note/" + links[j];  
+                link.href = url;
+                link.textContent = links[j];
+                link.target = "_blank"; 
+                li.appendChild(link);
+                ul.appendChild(li);
+            }
+
+            groupDiv.appendChild(ul);
+            fileList.appendChild(groupDiv);
+        }
+    </script>
+</body>
+</html>
